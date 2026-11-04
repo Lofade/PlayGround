@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#101510" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23101510'/%3E%3Cpath d='M13 12h16c14 0 22 8 22 20S43 52 29 52H13zm12 10v20h4c7 0 10-4 10-10s-3-10-10-10z' fill='%23c5d06f'/%3E%3C/svg%3E" />
+  <title>DEAD AIR — The Quiet Mile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="game-shell" aria-label="Dead Air game">
+    <canvas id="world" aria-label="Top-down open world game"></canvas>
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">DA<span>•</span></div><div><div class="brand-title">DEAD AIR</div><div class="brand-sub">THE QUIET MILE <span>／</span> ZONE 04</div></div></div>
+      <div class="weather"><span class="weather-icon">◒</span><div><b id="weather-name">DRIZZLE</b><small>WIND 06 M/S · 14:32</small></div></div>
+      <div class="faction-status"><i></i><div><b>LOCAL RADIO</b><small id="radio-line">“Keep your head down out there.”</small></div></div>
+      <button class="icon-button" id="sound-button" aria-label="Toggle sound" title="Sound on/off">◖))</button>
+      <button class="icon-button pause-button" id="pause-button" aria-label="Pause game">Ⅱ</button>
+    </header>
+
+    <section class="mission-card hud-card">
+      <div class="eyebrow"><span class="live-dot"></span> FIELD TASK <span class="task-code">#04-17</span></div>
+      <h1 id="mission-title">A strange signal</h1>
+      <p id="mission-description">Find the source near the old rail yard. Bring anything you find back to the Skadovsk.</p>
+      <div class="mission-progress"><span id="mission-distance">1.8 KM TO SIGNAL</span><span class="compass-arrow" id="objective-arrow">↗</span></div>
+      <div class="progress-track"><i id="mission-progress-bar"></i></div>
+      <div class="task-state"><span class="task-check" id="task-check">01</span><span id="task-state-label">LOCATE THE ANOMALY</span><span class="task-state-right">ACTIVE</span></div>
+    </section>
+
+    <section class="map-card hud-card">
+      <div class="panel-heading"><span>SECTOR MAP</span><span class="map-coords" id="map-coords">X 041 / Y 077</span></div>
+      <div class="map-wrap"><canvas id="minimap" width="240" height="160"></canvas><div class="map-north">N <b>↑</b></div></div>
+      <div class="map-legend"><span><i class="legend-player"></i> YOU</span><span><i class="legend-hostile"></i> HOSTILE</span><span><i class="legend-task"></i> SIGNAL</span></div>
+    </section>
+
+    <div class="interaction-prompt" id="interaction-prompt"><kbd>E</kbd><span>SEARCH STASH</span></div>
+    <div class="toast" id="toast"></div>
+    <div class="hit-flash" id="hit-flash"></div>
+
+    <section class="status-panel hud-card">
+      <div class="status-top"><span>VITALS</span><span class="status-label" id="status-label">STABLE</span></div>
+      <div class="stat-line"><span>HEALTH</span><div class="bar"><i id="health-bar"></i></div><b id="health-value">100</b></div>
+      <div class="stat-line rad-line"><span>RADIATION</span><div class="bar"><i id="rad-bar"></i></div><b id="rad-value">08</b></div>
+      <div class="status-bottom"><span>◈ <b id="rubles">1,240</b> RU</span><span>☗ <b id="artifact-count">0</b> / 1</span></div>
+    </section>
+
+    <section class="weapon-panel hud-card">
+      <div class="weapon-icon">⌁</div><div class="weapon-info"><div class="weapon-name">AKM <span>7.62×39</span></div><div class="ammo-row"><strong id="ammo-current">30</strong><span>/</span><span id="ammo-reserve">120</span><small>FMJ</small></div></div>
+      <div class="weapon-controls"><kbd>R</kbd><span>RELOAD</span></div>
+    </section>
+
+    <div class="hotbar">
+      <div class="hotbar-slot selected"><kbd>1</kbd><span class="slot-icon">⌖</span><b>AKM</b></div>
+      <div class="hotbar-slot"><kbd>2</kbd><span class="slot-icon med">✚</span><b>MEDKIT</b><small id="medkit-count">2</small></div>
+      <div class="hotbar-slot"><kbd>3</kbd><span class="slot-icon food">◉</span><b>WATER</b><small id="water-count">1</small></div>
+      <div class="hotbar-hint">1–3 SELECT <span>·</span> SHIFT SPRINT</div>
+    </div>
+
+    <div class="controls-note"><span>WASD</span> MOVE <i>·</i> <span>MOUSE</span> AIM <i>·</i> <span>LMB</span> FIRE <i>·</i> <span>E</span> INTERACT</div>
+    <div class="kill-feed" id="kill-feed"></div>
+    <div class="objective-banner" id="objective-banner">✳ &nbsp; Signal source discovered</div>
+
+    <div class="overlay" id="title-overlay">
+      <div class="title-noise"></div>
+      <div class="title-content">
+        <div class="title-kicker"><span></span> A LIFE SIMULATION · ZONE 04</div>
+        <div class="title-logo">DEAD<span>AIR</span></div>
+        <div class="title-sub">THE QUIET MILE</div>
+        <div class="title-rule"></div>
+        <p class="title-copy">The Zone doesn't wait for you.<br>Neither should you.</p>
+        <button class="primary-button" id="start-button"><span>ENTER THE ZONE</span><b>→</b></button>
+        <div class="title-foot"><span>WASD MOVE</span><i>／</i><span>CLICK TO FIRE</span><i>／</i><span>E TO SCAVENGE</span></div>
+      </div>
+      <div class="title-side-note">PRIPYAT EXCLUSION ZONE <span>51°23' N — 30°06' E</span></div>
+      <div class="title-version">FIELD BUILD 0.4.17 <span>·</span> SINGLE PLAYER</div>
+    </div>
+    <div class="overlay hidden" id="pause-overlay">
+      <div class="pause-box"><div class="eyebrow">FIELD PAUSED</div><h2>Catch your breath.</h2><p>The Zone is still out there. Resume when you're ready.</p><button class="primary-button" id="resume-button"><span>RESUME EXPLORATION</span><b>→</b></button><button class="text-button" id="restart-button">RESTART FROM LAST CAMP</button></div>
+    </div>
+    <div class="overlay hidden" id="end-overlay"><div class="pause-box"><div class="eyebrow" id="end-eyebrow">FIELD REPORT</div><h2 id="end-title">The Zone claims another.</h2><p id="end-copy">Your story ends here. The Zone will keep moving.</p><button class="primary-button" id="again-button"><span>TRY AGAIN</span><b>→</b></button></div></div>
+    <div class="touch-controls" id="touch-controls"><div class="stick" id="stick"><div class="stick-knob"></div></div><div class="touch-actions"><button id="touch-fire">FIRE</button><button id="touch-use">USE</button><button id="touch-sprint">RUN</button></div></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
