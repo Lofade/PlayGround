@@ -17,30 +17,34 @@
 - 🌍 [Create with OMGithub](https://go.ondev.store/).
 <!-- omgithub:readme:end -->
 
-## DEAD AIR — The Quiet Mile
+## СЕРАЯ ЗОНА — выживание в Чернобыльской зоне
 
-A standalone, top-down survival game about crossing the Zone, scavenging supplies, and recovering an artifact while hostile factions continue to move and fight.
+Автономная top-down Canvas-игра о вылазке из лагеря в Зону: исследуй сектора, ищи припасы, следи за здоровьем и запасами, переживай встречи с мутантами и враждебными группировками и возвращайся домой с добычей. Игра работает в браузере без сборки и внешних игровых библиотек.
 
-### Run locally
+### Запуск
 
-Serve this folder with any static web server, then open its address in a browser. For example, with Python:
+Запусти любой статический веб-сервер в папке проекта. Например, через Python:
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Open <http://localhost:8000>. No build step or dependencies are required.
+Открой <http://localhost:8000>. Сборка и установка зависимостей не нужны.
 
-### Controls
+### Управление
 
-- **WASD** or **arrow keys** — move; **Shift** — sprint
-- **Mouse** — aim; **left click** — fire; **R** — reload
-- **E** — search nearby supplies or pick up the artifact
-- **1** — select rifle; **2** — use medkit; **3** — drink water to reduce radiation
-- **P** or **Esc** — pause
-- **Touch screens** — left stick to move, right stick to aim, and **FIRE / USE / RUN / MED / WATER / RLD** for actions.
+- **WASD** или **стрелки** — движение; **Shift** — бег
+- **Мышь** — прицеливание; **ЛКМ** — огонь; **R** — перезарядка
+- **E** — взаимодействие с тайником, персонажем, артефактом или переходом между секторами
+- **1–4** — выбор оружия или предмета; **I** — открыть рюкзак
+- **P** или **Esc** — пауза
+- **Сенсорный экран** — левый стик для движения, правый для прицеливания; экранные кнопки — стрельба, действие, бег и использование предметов.
 
-Recover the artifact near the old rail yard and bring it back to the Skadovsk camp. Search supply caches along the way, and avoid the anomaly field near the map center.
+Проверь припасы перед выходом, исследуй отмеченные сектора и возвращайся в Скадовск. Находки и расходники помогают пережить следующую вылазку.
+
+### Лицензии игровых моделей
+
+Использованные модели и сведения об их авторах приведены ниже; исходные GLB-файлы и метаданные атрибуции находятся в `public/models/`. Активы по **CC BY-NC** допустимо использовать без отдельного разрешения только в некоммерческих целях и при соблюдении условий лицензии, включая атрибуцию. Для коммерческого распространения такого актива требуется отдельное разрешение правообладателя либо замена модели на актив с подходящей лицензией.
 
 ### 3D model credits
 
