@@ -38,6 +38,16 @@ Open <http://localhost:8000>. No build step or dependencies are required.
 - **E** — search nearby supplies or pick up the artifact
 - **1** — select rifle; **2** — use medkit; **3** — drink water to reduce radiation
 - **P** or **Esc** — pause
-- On touch screens, use the on-screen joystick and action buttons.
+- **Touch screens** — left stick to move, right stick to aim, and **FIRE / USE / RUN / MED / WATER / RLD** for actions.
 
 Recover the artifact near the old rail yard and bring it back to the Skadovsk camp. Search supply caches along the way, and avoid the anomaly field near the map center.
+
+### 3D model credits
+
+The in-game character, barracks, and pine-tree sprites are rendered from these Sketchfab models. The source GLB files and their attribution metadata are included in `public/models/`.
+
+- **A.B.C. Soldier (low poly)** by [Götz von Berlichingen](https://sketchfab.com/vonBerlichingen) — [Sketchfab model](https://sketchfab.com/3d-models/abc-soldier-low-poly-813f1b7ea16b41b79c8b9378516e5dc6)
+- **Hut - Barracks Package / Low Poly - Game Ready** by [Renend Studio](https://sketchfab.com/RenendStudio) — [Sketchfab model](https://sketchfab.com/3d-models/hut-barracks-package-low-poly-game-ready-746cd3525d0d419cbbb02891da9a2d1b)
+- **Low Poly Pine Trees** by [luka712](https://sketchfab.com/luka712) — [Sketchfab model](https://sketchfab.com/3d-models/low-poly-pine-trees-46c3811b9a9445cdb2ff3e663d1f2c11)
+
+All three models are licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). The sprites are rendered adaptations of the models for this game's Canvas renderer.
